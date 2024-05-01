@@ -1,0 +1,35 @@
+server:
+  port: 8083
+spring.cloud:
+  function:
+    definition: processor
+  stream:
+    bindings:
+      processor-in-0:
+        destination: order-created-new
+      processor-out-0:
+        destination: order-updated-new
+    kafka:
+      bindings:
+        processor-in-0:
+          consumer:
+            configuration:
+              value:
+                deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+        processor-out-0:
+          producer:
+            configuration:
+              value:
+                serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      binder:
+        replication-factor: 1
+        brokers:
+          - localhost:9092
+        configuration:
+          default:
+            spring.json.trusted.packages: com.restart.*
+service:
+  endpoints:
+    inventory: http://localhost:8081
+    payment: http://localhost:8082
+logging.level.org.springframework.cloud.stream: DEBUG
