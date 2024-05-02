@@ -25,7 +25,7 @@ public class OrderEventHandler {
 
     @Bean
     public Supplier<Flux<OrchestratorRequestDTO>> supplier(){
-        return () -> flux;
+        return      () -> flux;
     };
 
     @Bean

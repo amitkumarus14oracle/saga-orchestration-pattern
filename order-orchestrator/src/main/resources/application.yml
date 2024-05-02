@@ -26,8 +26,7 @@ spring.cloud:
         brokers:
           - localhost:9092
         configuration:
-          default:
-            spring.json.trusted.packages: com.restart.*
+          spring.json.trusted.packages: '*'
 service:
   endpoints:
     inventory: http://localhost:8081
